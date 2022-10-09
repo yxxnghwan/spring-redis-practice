@@ -1,4 +1,4 @@
-package alex.practice.springredis.ui.dto;
+package alex.practice.springredis.application.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-public class MemberCreationRequest {
+public class LoginTokenDto {
 
-    private String name;
-    private String account;
-    private String password;
+    private String accessToken;
+    private Long id;
 }

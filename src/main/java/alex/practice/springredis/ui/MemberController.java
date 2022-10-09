@@ -1,8 +1,12 @@
 package alex.practice.springredis.ui;
 
+import alex.practice.springredis.application.AuthService;
 import alex.practice.springredis.application.MemberService;
+import alex.practice.springredis.application.dto.LoginTokenDto;
 import alex.practice.springredis.application.dto.MemberCreationDto;
 import alex.practice.springredis.application.dto.MemberDto;
+import alex.practice.springredis.ui.dto.LoginMemberRequest;
+import alex.practice.springredis.ui.dto.LoginRequest;
 import alex.practice.springredis.ui.dto.MemberCreationRequest;
 import java.net.URI;
 import javax.validation.Valid;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
     private final MemberService memberService;
+    private final AuthService authService;
 
     @PostMapping
     public ResponseEntity<Void> createMember(@RequestBody @Valid final MemberCreationRequest request) {
@@ -35,6 +40,18 @@ public class MemberController {
     @GetMapping("/{id}")
     public ResponseEntity<MemberDto> findMember(@PathVariable("id") Long id) {
         final MemberDto member = memberService.findMember(id);
+        return ResponseEntity.ok(member);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginTokenDto> login(@RequestBody @Valid final LoginRequest loginRequest) {
+        final LoginTokenDto loginTokenDto = authService.login(loginRequest.getAccount(), loginRequest.getPassword());
+        return ResponseEntity.ok(loginTokenDto);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<MemberDto> findMe(@AuthenticationPrincipal final LoginMemberRequest loginMemberRequest) {
+        final MemberDto member = memberService.findMember(loginMemberRequest.getId());
         return ResponseEntity.ok(member);
     }
 }

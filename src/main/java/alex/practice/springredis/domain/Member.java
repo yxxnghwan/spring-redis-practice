@@ -30,4 +30,8 @@ public class Member {
         this.account = account;
         this.password = password;
     }
+
+    public boolean matchPassword(final PasswordMatcher passwordMatcher) {
+        return passwordMatcher.match(password);
+    }
 }

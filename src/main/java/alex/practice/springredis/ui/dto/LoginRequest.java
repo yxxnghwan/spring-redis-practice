@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
-public class MemberCreationRequest {
+public class LoginRequest {
 
-    private String name;
     private String account;
     private String password;
 }
