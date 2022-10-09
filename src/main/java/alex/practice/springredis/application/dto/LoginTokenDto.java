@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 public class LoginTokenDto {
 
     private String accessToken;
+    private String refreshToken;
     private Long id;
 }

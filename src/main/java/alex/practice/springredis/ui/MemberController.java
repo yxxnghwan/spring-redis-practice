@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
     private final MemberService memberService;
-    private final AuthService authService;
 
     @PostMapping
     public ResponseEntity<Void> createMember(@RequestBody @Valid final MemberCreationRequest request) {
@@ -41,12 +40,6 @@ public class MemberController {
     public ResponseEntity<MemberDto> findMember(@PathVariable("id") Long id) {
         final MemberDto member = memberService.findMember(id);
         return ResponseEntity.ok(member);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<LoginTokenDto> login(@RequestBody @Valid final LoginRequest loginRequest) {
-        final LoginTokenDto loginTokenDto = authService.login(loginRequest.getAccount(), loginRequest.getPassword());
-        return ResponseEntity.ok(loginTokenDto);
     }
 
     @GetMapping("/me")
